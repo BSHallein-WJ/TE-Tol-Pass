@@ -20,8 +20,10 @@ const questions_data = [
         category: "Toleranzen",
         title: "Warum Toleranzen",
         text: "Warum werden Toleranzen benötigt?",
-        solution: "<b>Kein Fertigungsverfahren trifft ein Maß exakt. Deshalb müssen Toleranzen definiert werden, um die zulässigen Abweichungen festzulegen.</b><br><br>" +
-            "<i>Erklärung:</i> Werkzeugverschleiß, Temperatur, Spannkräfte und Messunsicherheit sorgen dafür, dass jedes Werkstück ein klein wenig anders ausfällt. Eine Toleranz legt fest, wie groß diese Abweichung sein darf, ohne dass das Teil seine Funktion verliert."
+        solution: "<b>Kein Fertigungsverfahren trifft ein Maß exakt.<br>" +
+            "Deshalb müssen Toleranzen definiert werden, um die zulässigen Abweichungen festzulegen.</b><br><br>" +
+            "<i>Erklärung:</i> Werkzeugverschleiß, Temperatur, Spannkräfte und Messunsicherheit sorgen dafür, dass jedes Werkstück ein klein wenig anders ausfällt.<br><br>" +
+            "Eine Toleranz legt fest, wie groß diese Abweichung sein darf, ohne dass das Teil seine Funktion verliert."
     },
     {
         category: "Toleranzen",
@@ -55,25 +57,30 @@ const questions_data = [
         category: "Toleranzen",
         title: "Gruppen Maß-Toleranzen",
         text: "In welche Gruppen werden Maß-Toleranzen unterteilt?",
-        solution: "<b>Allgemein-Toleranzen, Zahlen-Toleranzen, ISO-Toleranzen.</b>"
+        solution: "<b>* Allgemein-Toleranzen,<br>" +
+            "* Zahlen-Toleranzen,<br>" +
+            "* ISO-Toleranzen.</b>"
     },
 
     {
         category: "Toleranzen",
         title: "Rechtwinkeligkeit",
-        text: "Was versteht man unter Rechtwinkeligkeit und wie wird sie in einer technischen Zeichnung angegeben?",
+        text: "Welches Symbol einer Form- oder Lagetoleranz ist hier dargestellt?",
         image: "Media/rechtwinkeligkeit.png",
-        solution: "<b>Die Rechtwinkeligkeitstoleranz legt fest, wie stark ein Element von der exakt rechtwinkligen Ausrichtung zu einem Bezug abweichen darf.</b><br><br>" +
-            "<i>Erklärung:</i> Die Toleranz legt fest, wie stark eine Fläche oder Linie vom exakt rechten Winkel abweichen darf.",
+        solution: "<b>Die Rechtwinkeligkeitstoleranz.<br>" +
+            "Sie legt fest, wie stark ein Element von der exakt rechtwinkligen Ausrichtung zu einem Bezug abweichen darf.</b><br><br>" +
+            "<i>Erklärung:</i> Die Toleranz legt fest, wie stark eine Fläche oder Linie vom exakt rechten Winkel abweichen darf.<br><br>" +
+            "<b>Beispiel:</b><br> Die rechte senkrechte Fläche muss innerhalb einer Toleranzzone von 0,1 mm rechtwinklig zur unteren waagrechten Fläche liegen.",
         solutionImage: "Media/rechtwinkeligkeit_bsp.png"
     },
 
     {
         category: "Toleranzen",
         title: "Parallelität",
-        text: "Welches Symbol ist hier dargestellt?",
+        text: "Welches Symbol einer Form- oder Lagetoleranz ist hier dargestellt?",
         image: "Media/parallelität.png",
-        solution: "<b>Parallelität. Sie beschreibt die Abweichung einer Linie oder Fläche von einer exakt parallelen Ausrichtung zu einer Bezugsfläche oder Bezugslinie.</b><br><br>" +
+        solution: "<b>Parallelität.</b><br>" +
+            "Sie beschreibt die Abweichung einer Linie oder Fläche von einer exakt parallelen Ausrichtung zu einer Bezugsfläche oder Bezugslinie.</b><br><br>" +
             "<i>Erklärung:</i> Die Parallelitätstoleranz legt fest, innerhalb welcher Toleranzzone die Linie oder Fläche liegen muss.",
         solutionImages: [
             "Media/parallelität_bsp.png",
@@ -163,7 +170,9 @@ const questions_data = [
         title: "Zahl in Toleranzangabe",
         text: "Was stellt die Zahl in einer Toleranzangabe dar (z.B. 7 in H7)?",
         solution: "<b>Den Toleranzgrad / Grundtoleranz (IT-Grad).</b><br><br>" +
-            "<i>Erklärung:</i> Je kleiner die Zahl, desto enger das Toleranzfeld (IT6 ist genauer als IT11)."
+            "<i>Erklärung:</i> Je kleiner die Zahl, desto enger das Toleranzfeld (IT6 ist genauer als IT11).<br><br>" +
+            "<b>Beispiel:</b><br>20H7 → Nennmaß 20 mm, Toleranzfeld H, Toleranzgrad 7.<br><br>" +
+            "Die zahl 7 sagt uns, wie groß die Toleranz ist z. B. +21µm",
     },
     {
         category: "Toleranzen",
@@ -191,21 +200,30 @@ const questions_data = [
         title: "Zahlen-Toleranz Abmaßposition",
         text: "Steht bei einer Zahlen-Toleranz das obere Abmaß oben oder unten?",
         solution: "<b>Das obere (größere) Abmaß steht immer oben.</b><br><br>" +
-            "<i>Erklärung:</i> Beispiel: Bei 32 (+0,5 / -0,2) steht +0,5 oben."
+            "<i>Erklärung:</i> Beispiel: Bei 32 (+0,5 / -0,2) steht +0,5 oben.",
+        solutionImage: "Media/zahlentoleranz1.png"
     },
     {
         category: "Toleranzen",
         title: "Toleranzklassen H, K, L",
         text: "Wofür stehen die Toleranzklassen H, K, L bei Allgemeintoleranzen?",
         solution: "<b>Für die Toleranzklassen von Form- und Lagetoleranzen.</b><br><br>" +
-            "<i>Erklärung:</i> Bei ISO 2768 stehen H, K und L für unterschiedliche Genauigkeitsklassen: H = fein, K = mittel, L = grob."
+            "<i>Erklärung:</i> Bei ISO 2768 stehen H, K und L für unterschiedliche Genauigkeitsklassen.<br>" +
+            "H = fein,<br>" +
+            "K = mittel, <br>" +
+            "L = grob."
     },
     {
         category: "Toleranzen",
         title: "Formtoleranzen",
         text: "Was ermitteln Formtoleranzen?",
         solution: "<b>Die maximale Abweichung von der idealen Geometrieform.</b><br><br>" +
-            "<i>Erklärung:</i> Dazu gehören Parameter wie Ebenheit, Geradheit, Rundheit und Zylinderform."
+            "<i>Erklärung:</i> Zu den Formtoleranzen gehören:<br>" +
+            "* Geradheit,<br>" +
+            "* Ebenheit,<br>" +
+            "* Rundheit,<br>" +
+            "* Zylinderform.<br><br>" +
+            "Formtoleranzen benötigen KEINEN Bezug."
     },
     {
         category: "Toleranzen",
