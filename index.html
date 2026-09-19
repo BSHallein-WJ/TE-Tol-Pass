@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quiz: Toleranzen & Passungen</title>
+    <link rel="icon" type="image/png" href="App-Logo.png">
+    <link rel="apple-touch-icon" href="App-Logo.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#0b57a4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Toleranzen">
+    <style>
+        :root {
+            --bg-color: #e8eef3;
+            --card-bg: #ffffff;
+            --primary-color: #174a68;
+            --primary-hover: #0f364d;
+            --secondary-color: #c66b35;
+            --secondary-hover: #a95427;
+            --danger-color: #a8443f;
+            --danger-hover: #873733;
+            --text-color: #26343d;
+            --muted-color: #62727d;
+            --line-color: #d5dfe5;
+            --soft-blue: #edf4f8;
+            --border-radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.65), rgba(214, 226, 234, 0.55));
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: min(100%, 720px);
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            box-shadow: 0 12px 35px rgba(24, 56, 73, 0.14);
+            position: relative;
+        }
+
+        /* Header Bereich */
+        .header {
+            padding: 16px 22px;
+            background-color: #fafdff;
+            border-bottom: 1px solid var(--line-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .header-title-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .header h1 {
+            font-size: 1.15rem;
+            letter-spacing: 0.02em;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .progress {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--muted-color);
+            background: var(--soft-blue);
+            border: 1px solid var(--line-color);
+            padding: 4px 8px;
+            border-radius: 5px;
+        }
+
+        .progress-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 116px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            overflow: hidden;
+            background-color: var(--line-color);
+            border-radius: 3px;
+        }
+
+        .progress-bar-fill {
+            width: 0;
+            height: 100%;
+            background-color: var(--secondary-color);
+            transition: width 0.2s ease;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-close-app {
+            background-color: transparent;
+            color: var(--danger-color);
+            border: 1px solid #d9aaa6;
+            padding: 7px 11px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+
+        .btn-close-app:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        /* Burger Button (Drei Striche) */
+        .btn-burger {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0 4px;
+            color: #555;
+            line-height: 1;
+        }
+
+        /* Dropdown Menü für Impressum */
+        .menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 62px;
+            right: 22px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .menu-dropdown button {
+            display: block;
+            width: 100%;
+            padding: 10px 16px;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            color: #333;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .menu-dropdown button:hover {
+            background-color: #f4f6f9;
+            color: var(--primary-color);
+        }
+
+        body.dark-mode {
+            --bg-color: #1b1d1f;
+            --card-bg: #292d30;
+            --primary-color: #0b6e9e;
+            --primary-hover: #0d89c1;
+            --secondary-color: #b85c25;
+            --secondary-hover: #d8783a;
+            --text-color: #edf1f3;
+            --muted-color: #c4cdd2;
+            --line-color: #4a5156;
+            --soft-blue: #343b40;
+            background-image: linear-gradient(135deg, #24272a, #17191b);
+        }
+
+        body.dark-mode .header,
+        body.dark-mode .footer-buttons {
+            background-color: #24272a;
+        }
+
+        body.dark-mode .question-box {
+            color: #eef5f8;
+            background: #263943;
+        }
+
+        body.dark-mode .solution-answer,
+        body.dark-mode .solution-explanation {
+            color: #a1f0b5;
+        }
+
+        body.dark-mode .solution-title {
+            color: #72f08f;
+        }
+
+        body.dark-mode .menu-dropdown,
+        body.dark-mode .modal-content {
+            background-color: #22323c;
+            color: var(--text-color);
+        }
+
+        body.dark-mode .menu-dropdown button,
+        body.dark-mode .close-modal {
+            color: var(--text-color);
+        }
+
+        body.dark-mode .menu-dropdown button:hover {
+            background-color: #2d424e;
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .btn-start,
+        body.dark-mode .btn-next {
+            background-color: #0b6e9e;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+        }
+
+        body.dark-mode .btn-start:hover,
+        body.dark-mode .btn-next:hover {
+            background-color: #0d89c1;
+        }
+
+        body.dark-mode .btn-solve {
+            background-color: #209b42;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+        }
+
+        body.dark-mode .btn-solve:hover {
+            background-color: #35c85d;
+        }
+
+        body.dark-mode .btn-prev {
+            background-color: #4d565c;
+            color: #ffffff;
+        }
+
+        body.dark-mode .btn-prev:hover {
+            background-color: #68747b;
+        }
+
+        body.dark-mode .btn-home {
+            background-color: #4d565c;
+            color: #ffffff;
+        }
+
+        body.dark-mode .btn-home:hover {
+            background-color: #68747b;
+        }
+
+        body.dark-mode button:disabled {
+            background-color: #3a4044;
+            color: #9ba5aa;
+        }
+
+        /* Hauptbereich */
+        .content-area {
+            flex: 1;
+            padding: 28px clamp(20px, 5vw, 52px);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .start-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100%;
+        }
+
+        .start-intro {
+            width: min(100%, 560px);
+            margin-bottom: 22px;
+        }
+
+        .start-intro h2 {
+            margin: 0 0 10px;
+            color: var(--primary-color);
+            font-size: 1.35rem;
+        }
+
+        .start-intro p {
+            margin: 0;
+            color: var(--muted-color);
+            font-size: 0.98rem;
+            line-height: 1.5;
+        }
+
+        .start-image {
+            max-width: min(100%, 560px);
+            max-height: 48vh;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 32px;
+            border: 1px solid var(--line-color);
+            border-radius: 6px;
+            box-shadow: 0 8px 22px rgba(24, 56, 73, 0.12);
+        }
+
+        .btn-start {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(23, 74, 104, 0.22);
+            transition: background-color 0.15s, transform 0.1s;
+        }
+
+        .btn-start:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: min(100%, 280px);
+        }
+
+        .question-box {
+            font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+            font-weight: 600;
+            line-height: 1.5;
+            color: #172b36;
+            padding: 24px 26px;
+            border: 1px solid var(--line-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 6px;
+            background: #fbfdfe;
+            box-shadow: 0 5px 16px rgba(24, 56, 73, 0.07);
+            white-space: pre-line;
+        }
+
+        .solution-box {
+            margin-top: 24px;
+            background-color: var(--soft-blue);
+            border-left: 5px solid #159447;
+            padding: 20px 22px;
+            border-radius: 5px;
+            display: none;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .solution-title {
+            font-weight: bold;
+            color: #08752f;
+            font-size: 0.68rem;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5cm;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .solution-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            margin-right: 6px;
+            border: 2px solid currentColor;
+            border-radius: 50%;
+            font-size: 0.72rem;
+            font-style: normal;
+            text-decoration: none;
+            vertical-align: -4px;
+        }
+
+        #solution-images {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .zoomable-image {
+            cursor: zoom-in;
+        }
+
+        #solution-images .zoomable-image {
+            max-width: calc(50% - 6px) !important;
+        }
+
+        .image-viewer {
+            display: none;
+            position: fixed;
+            z-index: 300;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.82);
+            cursor: zoom-out;
+        }
+
+        .image-viewer img {
+            max-width: 95vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .solution-answer {
+            font-weight: bold;
+            margin-bottom: 1cm;
+            color: #08752f;
+            white-space: pre-line;
+        }
+
+        .solution-explanation {
+            font-size: 0.95rem;
+            color: #176b38;
+            line-height: 1.5;
+        }
+
+        .footer-buttons {
+            padding: 14px 22px;
+            padding-bottom: calc(14px + env(safe-area-inset-bottom));
+            background-color: #fafdff;
+            border-top: 1px solid var(--line-color);
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        button {
+            padding: 14px 10px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .footer-buttons button {
+            flex: 1;
+        }
+
+        .btn-home {
+            flex: 0 0 72px !important;
+            background-color: #dbe7ed;
+            color: var(--primary-color);
+        }
+
+        .btn-home:hover {
+            background-color: #c5d8e2;
+        }
+
+        .btn-prev {
+            background-color: #64737c;
+            color: white;
+        }
+
+        .btn-solve {
+            background-color: #16803c;
+            color: white;
+            flex: 1.2 !important;
+        }
+
+        .btn-solve:hover {
+            background-color: #0f632d;
+        }
+
+        .btn-next {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 14px;
+            }
+
+            .header-title-container {
+                gap: 7px;
+            }
+
+            .header h1 {
+                font-size: 1rem;
+            }
+
+            .progress-wrapper {
+                min-width: 88px;
+            }
+
+            .progress {
+                font-size: 0.7rem;
+                padding: 3px 5px;
+            }
+
+            .footer-buttons {
+                gap: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .footer-buttons button {
+                padding: 12px 5px;
+                font-size: 0.78rem;
+            }
+
+            .btn-home {
+                flex-basis: 58px !important;
+            }
+        }
+
+        button:disabled {
+            background-color: #dce4e8;
+            color: #8a989f;
+            cursor: not-allowed;
+        }
+
+        /* Modal für Rechtliches */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            padding: 5vh 16px;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: min(100%, 400px);
+            max-height: 90vh;
+            overflow-y: auto;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #888;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <div class="header">
+            <div class="header-title-container">
+                <h1 id="category-title">Toleranzen & Passungen</h1>
+                <div class="progress-wrapper" id="progress-wrapper" style="display: none;">
+                    <div class="progress" id="progress">Frage 1 von 1</div>
+                    <div class="progress-bar" aria-hidden="true">
+                        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-burger" onclick="toggleMenu()" title="Menü öffnen"
+                    aria-label="Menü öffnen">&#9776;</button>
+            </div>
+        </div>
+
+        <!-- Menü mit Navigation und Rechtshinweisen -->
+        <div class="menu-dropdown" id="menu-dropdown">
+            <button type="button" onclick="goToStart()">Startseite</button>
+            <button type="button" onclick="toggleDarkMode()" id="dark-mode-button">Darkmode</button>
+            <button type="button" onclick="setQuestionOrder('mixed')">Fragen gemischt stellen</button>
+            <button type="button" onclick="setQuestionOrder('sequential')">Fragen der Reihe nach</button>
+            <button type="button" onclick="openLegalModal()">Impressum & Datenschutz</button>
+            <button type="button" onclick="closeApp()">App schließen</button>
+        </div>
+
+        <div class="content-area">
+            <div class="start-screen" id="start-screen">
+                <div class="start-intro">
+                    <h2>Teste und festige dein Wissen!</h2>
+                    <p>Beantworte die Fragen zu Toleranzen und Passungen. Wenn du mal nicht weiterweißt, nutze einfach
+                        die integrierten Erklärungen und Infografiken, um die Lösung zu verstehen.</p>
+                </div>
+                <img src="Titel-Toleranzen.png" alt="Titel Toleranzen und Passungen" class="start-image">
+                <div class="category-buttons">
+                    <button class="btn-start" onclick="startQuiz('Toleranzen')">Toleranzen (<span
+                            id="tolerances-count">0</span>)</button>
+                    <button class="btn-start" onclick="startQuiz('Passungen')">Passungen (<span
+                            id="fits-count">0</span>)</button>
+                </div>
+            </div>
+
+            <div id="quiz-screen" style="display: none;">
+                <div class="question-box" id="question">Lade Frage...</div>
+                <div id="question-images"></div>
+                <div class="solution-box" id="solution-box">
+                    <div class="solution-title"><span class="solution-icon" aria-hidden="true">&#10003;</span>Lösung &
+                        Erklärung</div>
+                    <div class="solution-answer" id="solution-answer"></div>
+                    <div id="solution-images"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-buttons" id="footer-buttons" style="display: none;">
+            <button class="btn-home" onclick="goToStart()">Home</button>
+            <button class="btn-prev" id="btn-prev" onclick="prevQuestion()">Zurück</button>
+            <button class="btn-solve" onclick="toggleSolution()">Lösung</button>
+            <button class="btn-next" id="btn-next" onclick="nextQuestion()">Weiter</button>
+        </div>
+    </div>
+
+    <div class="image-viewer" id="image-viewer" aria-hidden="true">
+        <img id="viewer-image" src="" alt="">
+    </div>
+
+    <!-- Modal für Datenschutz & Impressum -->
+    <div id="legal-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeLegalModal()">&times;</span>
+            <h3>Impressum & Datenschutz</h3>
+            <h4>Impressum</h4>
+            <p><strong>Medieninhaber, Herausgeber und für den Inhalt verantwortlich:</strong><br>
+                Josef Wallmann<br>
+                c/o Christine Weißenbacher<br>
+                Gaißau 172<br>
+                5425 Krispl<br>
+                Österreich</p>
+
+            <p><strong>Kontakt:</strong><br>
+                E-Mail: BS.Hallein@gmail.com</p>
+
+            <p><strong>Hinweis:</strong><br>
+                Dieses Lernangebot ist ein privates, nicht kommerzielles Projekt und dient ausschließlich
+                Bildungszwecken. Es besteht kein offizieller Zusammenhang mit einer Schule oder sonstigen
+                Bildungseinrichtung.</p>
+
+            <h4>Datenschutz</h4>
+            <p>Diese Anwendung verwendet keine Cookies, kein Tracking und keine Analysewerkzeuge. Sie speichert
+                ausschließlich die lokale Einstellung für den Darkmode im Browser. Es werden keine personenbezogenen
+                Daten gespeichert.</p>
+
+            <p>Die Website wird über GitHub Pages bereitgestellt. Beim Aufruf können durch GitHub technische
+                Verbindungsdaten, insbesondere die IP-Adresse, zu Sicherheitszwecken protokolliert und gespeichert
+                werden. Weitere Informationen enthält die
+                <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+                    target="_blank" rel="noopener noreferrer">Datenschutzerklärung von GitHub</a>.
+            </p>
+
+            <p><strong>Haftungsausschluss:</strong><br>
+                Die Inhalte wurden sorgfältig erstellt. Für die Richtigkeit und Vollständigkeit der Aufgaben und
+                Lösungen wird keine Gewähr übernommen.</p>
+        </div>
+    </div>
+
+    <script src="fragen.js"></script>
+    <script>
+        const originalQuestions = window.questionsData || [];
+
+        let questions = [];
+        let currentIndex = 0;
+        let quizActive = false;
+        let questionOrder = "mixed";
+        let selectedCategory = "Toleranzen";
+
+        const startScreen = document.getElementById("start-screen");
+        const categoryTitle = document.getElementById("category-title");
+        const quizScreen = document.getElementById("quiz-screen");
+        const footerButtons = document.getElementById("footer-buttons");
+        const progressEl = document.getElementById("progress");
+        const progressWrapper = document.getElementById("progress-wrapper");
+        const progressBarFill = document.getElementById("progress-bar-fill");
+        const categoryCounts = {
+            Toleranzen: document.getElementById("tolerances-count"),
+            Passungen: document.getElementById("fits-count")
+        };
+
+        const questionEl = document.getElementById("question");
+        const questionImagesEl = document.getElementById("question-images");
+        const solutionBox = document.getElementById("solution-box");
+        const solutionAnswerEl = document.getElementById("solution-answer");
+        const solutionImagesEl = document.getElementById("solution-images");
+        const btnPrev = document.getElementById("btn-prev");
+        const btnNext = document.getElementById("btn-next");
+
+        const imageViewer = document.getElementById("image-viewer");
+        const viewerImage = document.getElementById("viewer-image");
+
+        Object.entries(categoryCounts).forEach(([category, countElement]) => {
+            countElement.innerText = originalQuestions.filter(question => question.category === category).length;
+        });
+
+        const savedDarkMode = localStorage.getItem("darkMode") === "true";
+        if (savedDarkMode) {
+            document.body.classList.add("dark-mode");
+            document.getElementById("dark-mode-button").innerText = "Hellmodus";
+        }
+
+        function renderImages(container, imgList) {
+            if (imgList && imgList.length > 0) {
+                container.innerHTML = imgList.map(src =>
+                    `<img src="${src.trim()}" alt="" class="zoomable-image" style="max-width:100%; border-radius:6px; margin-top:14px; display:block; margin-left:auto; margin-right:auto;">`
+                ).join("");
+                container.style.display = container === solutionImagesEl ? "flex" : "block";
+
+                container.querySelectorAll(".zoomable-image").forEach(image => {
+                    image.addEventListener("click", event => {
+                        event.stopPropagation();
+                        viewerImage.src = image.src;
+                        imageViewer.style.display = "flex";
+                        imageViewer.setAttribute("aria-hidden", "false");
+                    });
+                });
+            } else {
+                container.innerHTML = "";
+                container.style.display = "none";
+            }
+        }
+
+        function closeImageViewer() {
+            imageViewer.style.display = "none";
+            imageViewer.setAttribute("aria-hidden", "true");
+            viewerImage.src = "";
+        }
+
+        imageViewer.addEventListener("click", closeImageViewer);
+
+        function shuffleQuestions(array) {
+            let shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function startQuiz(category) {
+            selectedCategory = category;
+            categoryTitle.innerText = category;
+            const categorizedQuestions = originalQuestions.filter(question => question.category === selectedCategory);
+            questions = questionOrder === "mixed" ? shuffleQuestions(categorizedQuestions) : [...categorizedQuestions];
+            currentIndex = 0;
+            quizActive = true;
+
+            startScreen.style.display = "none";
+            quizScreen.style.display = "block";
+            footerButtons.style.display = "flex";
+            progressWrapper.style.display = "flex";
+
+            loadQuestion();
+        }
+
+        function setQuestionOrder(order) {
+            questionOrder = order;
+            goToStart();
+        }
+
+        function loadQuestion() {
+            const q = questions[currentIndex];
+            questionEl.innerText = q.text;
+            renderImages(questionImagesEl, q.images || (Array.isArray(q.image) ? q.image : (q.image ? [q.image] : null)));
+
+            solutionAnswerEl.innerHTML = q.solution;
+            renderImages(solutionImagesEl, q.solutionImages || (Array.isArray(q.solutionImage) ? q.solutionImage : (q.solutionImage ? [q.solutionImage] : null)));
+
+            solutionBox.style.display = "none";
+            progressEl.innerText = `Frage ${currentIndex + 1} von ${questions.length}`;
+            progressBarFill.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+
+            btnPrev.disabled = currentIndex === 0;
+            btnNext.innerText = currentIndex === questions.length - 1 ? "Beenden" : "Weiter";
+            btnNext.setAttribute("aria-label", currentIndex === questions.length - 1 ? "Quiz beenden" : "Nächste Frage");
+            btnNext.disabled = false;
+        }
+
+        function toggleSolution() {
+            if (!quizActive) return;
+            solutionBox.style.display = (solutionBox.style.display === "block") ? "none" : "block";
+        }
+
+        function nextQuestion() {
+            if (!quizActive) return;
+            if (currentIndex === questions.length - 1) {
+                goToStart();
+                return;
+            }
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                loadQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (quizActive && currentIndex > 0) {
+                currentIndex--;
+                loadQuestion();
+            }
+        }
+
+        function goToStart() {
+            quizActive = false;
+            categoryTitle.innerText = "Toleranzen & Passungen";
+            startScreen.style.display = "flex";
+            quizScreen.style.display = "none";
+            footerButtons.style.display = "none";
+            progressWrapper.style.display = "none";
+            document.getElementById("menu-dropdown").style.display = "none";
+        }
+
+        function closeApp() {
+            window.close();
+            goToStart();
+        }
+
+        function toggleDarkMode() {
+            const darkModeEnabled = document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", darkModeEnabled);
+            document.getElementById("dark-mode-button").innerText = darkModeEnabled ? "Hellmodus" : "Darkmode";
+            document.getElementById("menu-dropdown").style.display = "none";
+        }
+
+        function toggleMenu() {
+            const dropdown = document.getElementById("menu-dropdown");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        }
+
+        function openLegalModal() {
+            document.getElementById("legal-modal").style.display = "block";
+            document.getElementById("menu-dropdown").style.display = "none";
+        }
+
+        function closeLegalModal() {
+            document.getElementById("legal-modal").style.display = "none";
+        }
+
+        // Menü schließen, wenn außerhalb geklickt wird
+        window.onclick = function (event) {
+            if (!event.target.matches('.btn-burger')) {
+                document.getElementById("menu-dropdown").style.display = "none";
+            }
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === "Escape" && imageViewer.style.display === "flex") {
+                closeImageViewer();
+                return;
+            }
+            if (!quizActive) {
+                if (e.key === "Enter" || e.key === " ") startQuiz(selectedCategory);
+                return;
+            }
+            if (e.key === "ArrowRight") nextQuestion();
+            if (e.key === "ArrowLeft") prevQuestion();
+            if (e.key === "ArrowDown" || e.key === " ") {
+                e.preventDefault();
+                toggleSolution();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
