@@ -11,8 +11,10 @@ const questions_data = [
         category: "Toleranzen",
         title: "Toleranz",
         text: "Was gibt die Toleranz an?",
-        solution: "<b>Die Differenz zwischen Höchstmaß und Mindestmaß.</b><br><br>" +
-            "<i>Erklärung:</i> Formel: Toleranz = Höchstmaß − Mindestmaß. Sie gibt den zulässigen Toleranzbereich eines Maßes an."
+        solution: "<b>Toleranzen beschreiben die maximal zulässigen Abweichungen vom Idealmaß oder der Idealform.</b><br><br>" +
+            "<i>Erklärung:</i><br><br>" +
+            "Formel:<br> Toleranz = Höchstmaß − Mindestmaß.<br>Sie gibt den zulässigen Toleranzbereich eines Maßes an.<br><br>" +
+            "Bsp.: 20 ± 0,1 → Toleranz = 0,2 mm (von 20,1 mm bis 19,9 mm)."
     },
     {
         category: "Toleranzen",

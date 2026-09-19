@@ -147,6 +147,22 @@
             line-height: 1;
         }
 
+        .btn-order-toggle {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--line-color);
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-order-toggle:hover {
+            background-color: var(--soft-blue);
+        }
+
         /* Dropdown Menü für Impressum */
         .menu-dropdown {
             display: none;
@@ -600,6 +616,8 @@
                 </div>
             </div>
             <div class="header-actions">
+                <button class="btn-order-toggle" id="order-toggle-button" onclick="toggleQuestionOrder()"
+                    title="Reihenfolge wechseln" aria-label="Reihenfolge wechseln">Modus: Sortiert</button>
                 <button class="btn-burger" onclick="toggleMenu()" title="Menü öffnen"
                     aria-label="Menü öffnen">&#9776;</button>
             </div>
@@ -701,8 +719,9 @@
         let questions = [];
         let currentIndex = 0;
         let quizActive = false;
-        let questionOrder = "mixed";
+        let questionOrder = "sequential";
         let selectedCategory = "Toleranzen";
+        const lastStartedQuestionByCategory = {};
 
         const startScreen = document.getElementById("start-screen");
         const categoryTitle = document.getElementById("category-title");
@@ -736,6 +755,8 @@
             document.body.classList.add("dark-mode");
             document.getElementById("dark-mode-button").innerText = "Hellmodus";
         }
+
+        updateOrderToggleButton();
 
         function renderImages(container, imgList) {
             if (imgList && imgList.length > 0) {
@@ -780,6 +801,21 @@
             categoryTitle.innerText = category;
             const categorizedQuestions = originalQuestions.filter(question => question.category === selectedCategory);
             questions = questionOrder === "mixed" ? shuffleQuestions(categorizedQuestions) : [...categorizedQuestions];
+
+            if (questionOrder === "mixed" && questions.length > 1) {
+                const lastStartedQuestion = lastStartedQuestionByCategory[category];
+                const lastQuestionIndex = questions.findIndex(question => question.text === lastStartedQuestion);
+
+                if (lastQuestionIndex === 0) {
+                    [questions[0], questions[1]] = [questions[1], questions[0]];
+                } else if (lastQuestionIndex > 0) {
+                    [questions[0], questions[lastQuestionIndex]] = [questions[lastQuestionIndex], questions[0]];
+                }
+            }
+
+            if (questions.length > 0) {
+                lastStartedQuestionByCategory[category] = questions[0].text;
+            }
             currentIndex = 0;
             quizActive = true;
 
@@ -793,7 +829,19 @@
 
         function setQuestionOrder(order) {
             questionOrder = order;
+            updateOrderToggleButton();
             goToStart();
+        }
+
+        function toggleQuestionOrder() {
+            setQuestionOrder(questionOrder === "sequential" ? "mixed" : "sequential");
+        }
+
+        function updateOrderToggleButton() {
+            const button = document.getElementById("order-toggle-button");
+            button.innerText = questionOrder === "mixed" ? "Modus: Gemischt" : "Modus: Sortiert";
+            button.setAttribute("aria-label", `Reihenfolge wechseln: ${button.innerText}`);
+            button.title = `Reihenfolge wechseln: ${button.innerText}`;
         }
 
         function loadQuestion() {
@@ -801,7 +849,7 @@
             questionEl.innerText = q.text;
             renderImages(questionImagesEl, q.images || (Array.isArray(q.image) ? q.image : (q.image ? [q.image] : null)));
 
-            solutionAnswerEl.innerHTML = q.solution;
+            solutionAnswerEl.innerHTML = q.solution.replace(/(<i>Erklärung:<\/i>)(?!<br>)/g, "$1<br>");
             renderImages(solutionImagesEl, q.solutionImages || (Array.isArray(q.solutionImage) ? q.solutionImage : (q.solutionImage ? [q.solutionImage] : null)));
 
             solutionBox.style.display = "none";
