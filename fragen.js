@@ -65,7 +65,7 @@ const questions_data = [
     {
         category: "Toleranzen",
         title: "Rechtwinkeligkeit",
-        text: "Welches Symbol einer Form- oder Lagetoleranz ist hier dargestellt?",
+        text: "Welches Toleranz-Symbol ist hier dargestellt?",
         image: "Media/rechtwinkeligkeit.png",
         solution: "<b>Die Rechtwinkeligkeitstoleranz.<br>" +
             "Sie legt fest, wie stark ein Element von der exakt rechtwinkligen Ausrichtung zu einem Bezug abweichen darf.</b><br><br>" +
@@ -77,7 +77,7 @@ const questions_data = [
     {
         category: "Toleranzen",
         title: "Parallelität",
-        text: "Welches Symbol einer Form- oder Lagetoleranz ist hier dargestellt?",
+        text: "Welches Toleranz-Symbol ist hier dargestellt?",
         image: "Media/parallelität.png",
         solution: "<b>Parallelität.</b><br>" +
             "Sie beschreibt die Abweichung einer Linie oder Fläche von einer exakt parallelen Ausrichtung zu einer Bezugsfläche oder Bezugslinie.</b><br><br>" +
@@ -87,6 +87,220 @@ const questions_data = [
             "Media/parallelität_bsp3.png"
         ]
     },
+
+    {
+        category: "Toleranzen",
+        title: "Zahl in Toleranzangabe",
+        text: "Was stellt die Zahl 7 in der Toleranzangabe H7 dar?",
+        solution: "<b>Den Toleranzgrad / Grundtoleranz (IT-Grad).</b><br><br>" +
+            "<i>Erklärung:</i> Je kleiner die Zahl, desto enger das Toleranzfeld (IT6 ist genauer als IT11).<br><br>" +
+            "<b>Beispiel:</b><br>20H7 → Nennmaß 20 mm, Toleranzfeld H, Toleranzgrad 7.<br><br>" +
+            "Die zahl 7 sagt uns, wie groß die Toleranz ist z. B. +21µm",
+    },
+    {
+        category: "Toleranzen",
+        title: "Ist-Maß",
+        text: "Was ist das Ist-Maß?",
+        solution: "<b>Das am fertigen Werkstück gemessene Maß.</b><br><br>" +
+            "<i>Erklärung:</i> Das Ist-Maß muss innerhalb der Toleranzgrenzen liegen."
+    },
+    {
+        category: "Toleranzen",
+        title: "Allgemeintoleranz in der Zeichnung",
+        text: "Wo befindet sich die Angabe zur Allgemeintoleranz in einer Zeichnung?",
+        solution: "<b>Im Schriftkopf der Zeichnung (z. B. 'm').</b><br><br>" +
+            "<i>Erklärung:</i> Gilt für alle Maße ohne separat angegebene Einzeltoleranz."
+    },
+    {
+        category: "Toleranzen",
+        title: "Höchstmaß (Go)",
+        text: "Was versteht man unter dem Höchstmaß (Go)?",
+        solution: "<b>Das durch die Toleranz festgelegte Größtmaß.</b><br><br>" +
+            "<i>Erklärung:</i> z. B. 20±0,4 - Höchstmaß = 20,4."
+    },
+    {
+        category: "Toleranzen",
+        title: "Zahlen-Toleranz Abmaßposition",
+        text: "Steht bei einer Zahlen-Toleranz das obere Abmaß oben oder unten?",
+        solution: "<b>Das obere (größere) Abmaß steht immer oben.</b><br><br>" +
+            "<i>Erklärung:</i> Beispiel: Bei 32 (+0,5 / -0,2) steht +0,5 oben.",
+        solutionImage: "Media/zahlentoleranz1.png"
+    },
+    {
+        category: "Toleranzen",
+        title: "Toleranzklassen H, K, L",
+        text: "Wofür stehen die Toleranzklassen H, K, L bei Allgemeintoleranzen?",
+        solution: "<b>Für die Toleranzklassen von Form- und Lagetoleranzen.</b><br><br>" +
+            "<i>Erklärung:</i> Bei ISO 2768 stehen H, K und L für unterschiedliche Genauigkeitsklassen.<br>" +
+            "H = fein,<br>" +
+            "K = mittel, <br>" +
+            "L = grob."
+    },
+    {
+        category: "Toleranzen",
+        title: "Formtoleranzen",
+        text: "Was ermitteln Formtoleranzen?",
+        solution: "<b>Die maximale Abweichung von der idealen Geometrieform.</b><br><br>" +
+            "<i>Erklärung:</i> Zu den Formtoleranzen gehören:<br>" +
+            "* Geradheit,<br>" +
+            "* Ebenheit,<br>" +
+            "* Rundheit,<br>" +
+            "* Zylinderform.<br><br>" +
+            "Formtoleranzen benötigen KEINEN Bezug."
+    },
+    {
+        category: "Toleranzen",
+        title: "Lagetoleranz vs. Formtoleranz",
+        text: "Was unterscheidet eine Lagetoleranz von einer Formtoleranz?",
+        solution: "<b>Formtoleranzen begrenzen die Abweichung der Form.<br>" +
+            "Lagetoleranzen begrenzen die Lage oder Ausrichtung eines Elements.</b><br><br>" +
+            "<i>Erklärung:</i> Eine Formtoleranz beschreibt, wie stark eine Form von der idealen Form abweichen darf.<br>" +
+            "Eine Lagetoleranz beschreibt, wo ein Element liegen oder wie es ausgerichtet sein muss.<br><br>" +
+            "<b>Beispiel:</b> Parallelität legt fest, wie parallel eine Fläche oder Linie zu einem Bezug sein muss."
+    },
+    {
+        category: "Toleranzen",
+        title: "Härteangaben tolerieren",
+        text: "Wie müssen Härteangaben auf technischen Zeichnungen toleriert werden?",
+        solution: "<b>Dem Härtewert ist eine möglichst große + Toleranz anzuhängen.</b><br><br>" +
+            "<i>Erklärung:</i> Der Härtewert auf einer Zeichnung ist stets der Mindesthärtewert.<br>" +
+            "Deswegen benötigt man eine + Toleranz.<br><br>" +
+            "<b>Beispiel:</b> 58+4 HRC"
+    },
+    {
+        category: "Toleranzen",
+        title: "Form-/Lagetoleranzen zusätzlich",
+        text: "Warum werden Form- und Lagetoleranzen zusätzlich zu Maßtoleranzen eingesetzt?",
+        solution: "<b>Weil Maßtoleranzen Abweichungen der Form/Lage nicht begrenzen.</b><br><br>" +
+            "<i>Erklärung:</i> Ein Bauteil kann im Maß liegen, aber dennoch unrund oder verzogen sein."
+    },
+    {
+        category: "Toleranzen",
+        title: "Mindestmaß",
+        text: "Was versteht man unter dem Mindestmaß?",
+        solution: "<b>Das kleinste zulässige Maß eines Werkstücks oder einer Bohrung.</b><br><br>" +
+            "<i>Erklärung:</i> Das tatsächliche Maß darf das Mindestmaß nicht unterschreiten.<br><br>" +
+            "<b>Beispiel:</b> Nennmaß 20 mm ± 0,1 mm → Mindestmaß = 19,9 mm"
+    },
+
+    {
+        category: "Toleranzen",
+        title: "Abmaß",
+        text: "Was versteht man unter einem Abmaß?",
+        solution: "<b>Die Abweichung eines Grenzmaßes vom Nennmaß.</b><br><br>" +
+            "<i>Erklärung:</i> Es gibt ein oberes und ein unteres Abmaß.<br>" +
+            "Das obere Abmaß gehört zum Höchstmaß, das untere Abmaß zum Mindestmaß.<br><br>" +
+            "<b>Beispiel:</b> Nennmaß 20 mm ± 0,1 mm → oberes Abmaß = +0,1 mm, unteres Abmaß = −0,1 mm"
+    },
+
+
+    {
+        category: "Toleranzen",
+        title: "Toleranzzone",
+        text: "Was versteht man unter einer Toleranzzone?",
+        solution: "<b>Den Bereich zwischen Mindestmaß und Höchstmaß.</b><br><br>" +
+            "<i>Erklärung:</i> Innerhalb dieser Zone darf das Ist-Maß liegen, damit das Werkstück maßlich zulässig ist."
+    },
+
+    {
+        category: "Toleranzen",
+        title: "Toleranz berechnen",
+        text: "Wie berechnet man die Toleranz?",
+        solution: "<b>Toleranz = Höchstmaß − Mindestmaß.</b><br><br>" +
+            "<i>Erklärung:</i> Beispiel: 20,10 mm − 19,90 mm = 0,20 mm Toleranz."
+    },
+
+
+    {
+        category: "Toleranzen",
+        title: "Einseitige Toleranz",
+        text: "Was bedeutet eine Maßangabe mit nur einem positiven Abmaß?",
+        solution: "<b>Die zulässige Abweichung liegt nur auf der positiven Seite des Nennmaßes.</b><br><br>" +
+            "<i>Erklärung:</i> Beispiel: 20 +0,2 bedeutet: Das Maß darf zwischen 20,000 mm und 20,200 mm liegen."
+    },
+
+
+    {
+        category: "Toleranzen",
+        title: "Lage des Toleranzfeldes",
+        text: "Was bestimmt der Buchstabe bei einer ISO-Toleranz?",
+        solution: "<b>Die Lage des Toleranzfeldes zum Nennmaß.</b><br><br>" +
+            "<i>Erklärung:</i> Der Buchstabe gibt die Grundabweichung bzw. die Lage des Toleranzfeldes an.<br><br>" +
+            "<i>Erklärung:</i> Bei Bohrungen werden Großbuchstaben, bei Wellen Kleinbuchstaben verwendet.<br>" +
+            "H oder h grenzt dabei immer an das Nennmaß an (0 Abmaß)."
+    },
+
+    {
+        category: "Toleranzen",
+        title: "Bezugselement",
+        text: "Was ist ein Bezugselement bei Form- und Lagetoleranzen?",
+        solution: "<b>Ein festgelegtes Element eines Werkstücks, auf das sich eine geometrische Toleranz bezieht.</b><br><br>" +
+            "<i>Erklärung:</i> Ein Bezug kann beispielsweise eine Fläche, eine Achse oder eine Mittelebene sein."
+    },
+
+    {
+        category: "Toleranzen",
+        title: "Geradheit",
+        text: "Was beschreibt die Geradheitstoleranz?",
+        solution: "<b>Wie stark eine Linie oder Achse von einer ideal geraden Linie abweichen darf.</b><br><br>" +
+            "<i>Erklärung:</i> Die Geradheit begrenzt die Formabweichung von einer geraden Geometrie."
+    },
+
+    {
+        category: "Toleranzen",
+        title: "Ebenheit",
+        text: "Was beschreibt die Ebenheitstoleranz?",
+        solution: "<b>Wie stark eine Fläche von einer ideal ebenen Fläche abweichen darf.</b><br><br>" +
+            "<i>Erklärung:</i> Die gesamte Fläche muss innerhalb der festgelegten Toleranzzone liegen.",
+        solutionImage: "Media/ebenheit_bsp.png"
+    },
+
+    {
+        category: "Toleranzen",
+        title: "Rundheit",
+        text: "Was beschreibt die Rundheitstoleranz?",
+        solution: "<b>Wie stark ein kreisförmiger Querschnitt von einer idealen Kreisform abweichen darf.</b><br><br>" +
+            "<i>Erklärung:</i> Die Rundheit ist eine Formtoleranz."
+    },
+
+    {
+        category: "Toleranzen",
+        title: "Zylinderform",
+        text: "Was beschreibt die Zylinderformtoleranz?",
+        solution: "<b>Wie stark die Mantelfläche eines Zylinders von einer idealen Zylinderform abweichen darf.</b><br><br>" +
+            "<i>Erklärung:</i> Die Zylinderform berücksichtigt die gesamte zylindrische Oberfläche."
+    },
+
+    {
+        category: "Toleranzen",
+        title: "Positionstoleranz",
+        text: "Was beschreibt eine Positionstoleranz?",
+        solution: "<b>Sie legt fest, wie weit die tatsächliche Position eines Elements von seiner idealen Position abweichen darf.</b><br><br>" +
+            "<i>Erklärung:</i> Sie wird beispielsweise zur genauen Festlegung der Lage von Bohrungen verwendet."
+    },
+
+    {
+        category: "Toleranzen",
+        title: "Warum Formtoleranzen?",
+        text: "Warum reicht eine Maßtoleranz bei einer Welle manchmal nicht aus?",
+        solution: "<b>Weil ein Maß innerhalb der Toleranz liegen kann, obwohl die tatsächliche Form trotzdem unzulässig ist.</b><br><br>" +
+            "<i>Erklärung:</i> Eine Welle kann beispielsweise im Durchmessermaß liegen, aber trotzdem unrund oder gekrümmt sein."
+    },
+
+
+
+
+
+
+
+
+
+    '------------------------------------------------------------------------------------------------------------------------------------------------',
+
+
+
+
+
 
     {
         category: "Passungen",
@@ -166,89 +380,6 @@ const questions_data = [
             "<i>Erklärung:</i> Ideal bei Verwendung von Rundstählen ohne Nachbearbeitung. Rundstähle können z. B. in der Genauigkeitsklasse h6 gekauft werden."
     },
     {
-        category: "Toleranzen",
-        title: "Zahl in Toleranzangabe",
-        text: "Was stellt die Zahl in einer Toleranzangabe dar (z.B. 7 in H7)?",
-        solution: "<b>Den Toleranzgrad / Grundtoleranz (IT-Grad).</b><br><br>" +
-            "<i>Erklärung:</i> Je kleiner die Zahl, desto enger das Toleranzfeld (IT6 ist genauer als IT11).<br><br>" +
-            "<b>Beispiel:</b><br>20H7 → Nennmaß 20 mm, Toleranzfeld H, Toleranzgrad 7.<br><br>" +
-            "Die zahl 7 sagt uns, wie groß die Toleranz ist z. B. +21µm",
-    },
-    {
-        category: "Toleranzen",
-        title: "Ist-Maß",
-        text: "Was ist das Ist-Maß?",
-        solution: "<b>Das am fertigen Werkstück gemessene Maß.</b><br><br>" +
-            "<i>Erklärung:</i> Das Ist-Maß muss innerhalb der Toleranzgrenzen liegen."
-    },
-    {
-        category: "Toleranzen",
-        title: "Allgemeintoleranz in der Zeichnung",
-        text: "Wo befindet sich die Angabe zur Allgemeintoleranz in einer Zeichnung?",
-        solution: "<b>Im Schriftkopf der Zeichnung (z. B. 'm').</b><br><br>" +
-            "<i>Erklärung:</i> Gilt für alle Maße ohne separat angegebene Einzeltoleranz."
-    },
-    {
-        category: "Toleranzen",
-        title: "Höchstmaß (Go)",
-        text: "Was versteht man unter dem Höchstmaß (Go)?",
-        solution: "<b>Das durch die Toleranz festgelegte Größtmaß.</b><br><br>" +
-            "<i>Erklärung:</i> z. B. 20±0,4 - Höchstmaß = 20,4."
-    },
-    {
-        category: "Toleranzen",
-        title: "Zahlen-Toleranz Abmaßposition",
-        text: "Steht bei einer Zahlen-Toleranz das obere Abmaß oben oder unten?",
-        solution: "<b>Das obere (größere) Abmaß steht immer oben.</b><br><br>" +
-            "<i>Erklärung:</i> Beispiel: Bei 32 (+0,5 / -0,2) steht +0,5 oben.",
-        solutionImage: "Media/zahlentoleranz1.png"
-    },
-    {
-        category: "Toleranzen",
-        title: "Toleranzklassen H, K, L",
-        text: "Wofür stehen die Toleranzklassen H, K, L bei Allgemeintoleranzen?",
-        solution: "<b>Für die Toleranzklassen von Form- und Lagetoleranzen.</b><br><br>" +
-            "<i>Erklärung:</i> Bei ISO 2768 stehen H, K und L für unterschiedliche Genauigkeitsklassen.<br>" +
-            "H = fein,<br>" +
-            "K = mittel, <br>" +
-            "L = grob."
-    },
-    {
-        category: "Toleranzen",
-        title: "Formtoleranzen",
-        text: "Was ermitteln Formtoleranzen?",
-        solution: "<b>Die maximale Abweichung von der idealen Geometrieform.</b><br><br>" +
-            "<i>Erklärung:</i> Zu den Formtoleranzen gehören:<br>" +
-            "* Geradheit,<br>" +
-            "* Ebenheit,<br>" +
-            "* Rundheit,<br>" +
-            "* Zylinderform.<br><br>" +
-            "Formtoleranzen benötigen KEINEN Bezug."
-    },
-    {
-        category: "Toleranzen",
-        title: "Lagetoleranz vs. Formtoleranz",
-        text: "Was unterscheidet eine Lagetoleranz von einer Formtoleranz?",
-        solution: "<b>Formtoleranzen begrenzen die Abweichung der Form. Lagetoleranzen begrenzen die Lage oder Ausrichtung eines Elements.</b><br><br>" +
-            "<i>Erklärung:</i> Eine Formtoleranz beschreibt, wie stark eine Form von der idealen Form abweichen darf.<br>" +
-            "Eine Lagetoleranz beschreibt, wo ein Element liegen oder wie es ausgerichtet sein muss.<br><br>" +
-            "<b>Beispiel:</b> Parallelität legt fest, wie parallel eine Fläche oder Linie zu einem Bezug sein muss."
-    },
-    {
-        category: "Toleranzen",
-        title: "Härteangaben tolerieren",
-        text: "Wie müssen Härteangaben auf technischen Zeichnungen toleriert werden?",
-        solution: "<b>Nach der jeweiligen technischen Vorgabe bzw. Norm.</b><br><br>" +
-            "<i>Erklärung:</i> Härteangaben werden mit einer festgelegten zulässigen Abweichung angegeben. Eine allgemeine Regel, dass immer eine möglichst große Plus-Toleranz verwendet wird, gibt es nicht."
-    },
-    {
-        category: "Toleranzen",
-        title: "Form-/Lagetoleranzen zusätzlich",
-        text: "Warum werden Form- und Lagetoleranzen zusätzlich zu Maßtoleranzen eingesetzt?",
-        solution: "<b>Weil Maßtoleranzen Abweichungen der Form/Lage nicht begrenzen.</b><br><br>" +
-            "<i>Erklärung:</i> Ein Bauteil kann im Maß liegen, aber dennoch kegelig oder verzogen sein."
-    },
-    {
         category: "Passungen",
         title: "Passungsempfehlungen Wälzlager",
         text: "Woher stammen Passungsempfehlungen für Wälzlager meistens?",
@@ -269,95 +400,6 @@ const questions_data = [
 
 
 
-
-
-
-
-
-
-
-    {
-        category: "Toleranzen",
-        title: "Mindestmaß",
-        text: "Was versteht man unter dem Mindestmaß?",
-        solution: "<b>Das kleinste zulässige Maß eines Werkstücks oder einer Bohrung.</b><br><br>" +
-            "<i>Erklärung:</i> Das tatsächliche Maß darf das Mindestmaß nicht unterschreiten.<br><br>" +
-            "<b>Beispiel:</b> Nennmaß 20 mm ± 0,1 mm → Mindestmaß = 19,9 mm"
-    },
-
-    {
-        category: "Toleranzen",
-        title: "Abmaß",
-        text: "Was versteht man unter einem Abmaß?",
-        solution: "<b>Die Abweichung eines Grenzmaßes vom Nennmaß.</b><br><br>" +
-            "<i>Erklärung:</i> Es gibt ein oberes und ein unteres Abmaß.<br>" +
-            "Das obere Abmaß gehört zum Höchstmaß, das untere Abmaß zum Mindestmaß.<br><br>" +
-            "<b>Beispiel:</b> Nennmaß 20 mm ± 0,1 mm → oberes Abmaß = +0,1 mm, unteres Abmaß = −0,1 mm"
-    },
-
-    {
-        category: "Toleranzen",
-        title: "Oberes Abmaß",
-        text: "Was ist das obere Abmaß?",
-        solution: "<b>Die Differenz zwischen Höchstmaß und Nennmaß.</b><br><br>" +
-            "<i>Erklärung:</i> Formel: Oberes Abmaß = Höchstmaß − Nennmaß."
-    },
-
-    {
-        category: "Toleranzen",
-        title: "Unteres Abmaß",
-        text: "Was ist das untere Abmaß?",
-        solution: "<b>Die Differenz zwischen Mindestmaß und Nennmaß.</b><br><br>" +
-            "<i>Erklärung:</i> Formel: Unteres Abmaß = Mindestmaß − Nennmaß."
-    },
-
-    {
-        category: "Toleranzen",
-        title: "Toleranzzone",
-        text: "Was versteht man unter einer Toleranzzone?",
-        solution: "<b>Den Bereich zwischen Mindestmaß und Höchstmaß.</b><br><br>" +
-            "<i>Erklärung:</i> Innerhalb dieser Zone darf das Ist-Maß liegen, damit das Werkstück maßlich zulässig ist."
-    },
-
-    {
-        category: "Toleranzen",
-        title: "Toleranz berechnen",
-        text: "Wie berechnet man die Toleranz?",
-        solution: "<b>Toleranz = Höchstmaß − Mindestmaß.</b><br><br>" +
-            "<i>Erklärung:</i> Beispiel: 20,10 mm − 19,90 mm = 0,20 mm Toleranz."
-    },
-
-    {
-        category: "Toleranzen",
-        title: "Beidseitige Toleranz",
-        text: "Was bedeutet eine Angabe wie 20 ± 0,1?",
-        solution: "<b>Das Maß darf um 0,1 mm nach oben und nach unten abweichen.</b><br><br>" +
-            "<i>Erklärung:</i> Mindestmaß = 19,9 mm, Höchstmaß = 20,1 mm."
-    },
-
-    {
-        category: "Toleranzen",
-        title: "Einseitige Toleranz",
-        text: "Was bedeutet eine Maßangabe mit nur einem positiven oder negativen Abmaß?",
-        solution: "<b>Die zulässige Abweichung liegt nur auf einer Seite des Nennmaßes.</b><br><br>" +
-            "<i>Erklärung:</i> Beispiel: 20 +0,2 / 0 bedeutet: Das Maß darf zwischen 20,0 mm und 20,2 mm liegen."
-    },
-
-    {
-        category: "Toleranzen",
-        title: "IT-Toleranzgrad",
-        text: "Was sagt der IT-Toleranzgrad aus?",
-        solution: "<b>Er bestimmt die Größe bzw. Breite des Toleranzfeldes.</b><br><br>" +
-            "<i>Erklärung:</i> Je kleiner die IT-Zahl, desto kleiner ist das Toleranzfeld. Die Zahl allein bestimmt jedoch nicht die Lage des Toleranzfeldes."
-    },
-
-    {
-        category: "Toleranzen",
-        title: "Lage des Toleranzfeldes",
-        text: "Was bestimmt der Buchstabe bei einer ISO-Toleranz?",
-        solution: "<b>Die Lage des Toleranzfeldes zum Nennmaß.</b><br><br>" +
-            "<i>Erklärung:</i> Der Buchstabe gibt die Grundabweichung bzw. die Lage des Toleranzfeldes an. Bei Bohrungen werden Großbuchstaben, bei Wellen Kleinbuchstaben verwendet."
-    },
 
     {
         category: "Passungen",
@@ -430,65 +472,6 @@ const questions_data = [
         solution: "<b>0,03 mm</b><br><br>" +
             "<i>Erklärung:</i> Toleranz = 30,03 mm − 30,00 mm = 0,03 mm."
     },
-
-    {
-        category: "Form- und Lagetoleranzen",
-        title: "Bezugselement",
-        text: "Was ist ein Bezugselement bei Form- und Lagetoleranzen?",
-        solution: "<b>Ein festgelegtes Element eines Werkstücks, auf das sich eine geometrische Toleranz bezieht.</b><br><br>" +
-            "<i>Erklärung:</i> Ein Bezug kann beispielsweise eine Fläche, eine Achse oder eine Mittelebene sein."
-    },
-
-    {
-        category: "Form- und Lagetoleranzen",
-        title: "Geradheit",
-        text: "Was beschreibt die Geradheitstoleranz?",
-        solution: "<b>Wie stark eine Linie oder Achse von einer ideal geraden Linie abweichen darf.</b><br><br>" +
-            "<i>Erklärung:</i> Die Geradheit begrenzt die Formabweichung von einer geraden Geometrie."
-    },
-
-    {
-        category: "Form- und Lagetoleranzen",
-        title: "Ebenheit",
-        text: "Was beschreibt die Ebenheitstoleranz?",
-        solution: "<b>Wie stark eine Fläche von einer ideal ebenen Fläche abweichen darf.</b><br><br>" +
-            "<i>Erklärung:</i> Die gesamte Fläche muss innerhalb der festgelegten Toleranzzone liegen."
-    },
-
-    {
-        category: "Form- und Lagetoleranzen",
-        title: "Rundheit",
-        text: "Was beschreibt die Rundheitstoleranz?",
-        solution: "<b>Wie stark ein kreisförmiger Querschnitt von einer idealen Kreisform abweichen darf.</b><br><br>" +
-            "<i>Erklärung:</i> Die Rundheit ist eine Formtoleranz."
-    },
-
-    {
-        category: "Form- und Lagetoleranzen",
-        title: "Zylinderform",
-        text: "Was beschreibt die Zylinderformtoleranz?",
-        solution: "<b>Wie stark die Mantelfläche eines Zylinders von einer idealen Zylinderform abweichen darf.</b><br><br>" +
-            "<i>Erklärung:</i> Die Zylinderform berücksichtigt die gesamte zylindrische Oberfläche."
-    },
-
-    {
-        category: "Form- und Lagetoleranzen",
-        title: "Positionstoleranz",
-        text: "Was beschreibt eine Positionstoleranz?",
-        solution: "<b>Sie legt fest, wie weit die tatsächliche Position eines Elements von seiner idealen Position abweichen darf.</b><br><br>" +
-            "<i>Erklärung:</i> Sie wird beispielsweise zur genauen Festlegung der Lage von Bohrungen verwendet."
-    },
-
-    {
-        category: "Form- und Lagetoleranzen",
-        title: "Warum Formtoleranzen?",
-        text: "Warum reicht eine Maßtoleranz bei einer Welle manchmal nicht aus?",
-        solution: "<b>Weil ein Maß innerhalb der Toleranz liegen kann, obwohl die tatsächliche Form trotzdem unzulässig ist.</b><br><br>" +
-            "<i>Erklärung:</i> Eine Welle kann beispielsweise im Durchmessermaß liegen, aber trotzdem unrund oder gekrümmt sein."
-    }
-
-
-
 
 ];
 
