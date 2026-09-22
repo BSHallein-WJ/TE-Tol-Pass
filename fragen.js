@@ -1,4 +1,30 @@
 const questions_data = [
+
+    //  Codebeispiel für Frage:
+
+    //    category: "Toleranzen",
+    //    level: "N",     N = normal= grüber punkt, NV = normal + vertieft = beide punkte, V = vertieft = blauer punkt
+    //    title: "Nennmaß",
+    //    text: "Was versteht man unter dem Nennmaß?",
+    //    solution: "<b>Das in der Zeichnung angegebene Grundmaß.</b><br><br>" +
+    //        "<i>Erklärung:</i> Das Nennmaß ist das Ausgangsmaß, auf das sich alle Toleranzen und Abmaße beziehen.",
+    //    solutionImage: "Media/nennmaß.png"
+
+
+
+    //    image: "Media/parallelität.png",
+    //    solution: "<b>Parallelität.</b><br>" +
+    //        "Sie beschreibt die Abweichung einer Linie oder Fläche von einer exakt parallelen Ausrichtung zu einer Bezugsfläche oder Bezugslinie.</b><br><br>" +
+    //        "<i>Erklärung:</i> Die Parallelitätstoleranz legt fest, innerhalb welcher Toleranzzone die Linie oder Fläche liegen muss.",
+    //    solutionImages: [
+    //        "Media/parallelität_bsp.png",
+    //        "Media/parallelität_bsp3.png"
+    //    ]
+
+
+
+
+
     {
         category: "Toleranzen",
         level: "N",
@@ -20,7 +46,7 @@ const questions_data = [
     },
     {
         category: "Toleranzen",
-        level: "NV",
+        level: "N",
         title: "Warum Toleranzen",
         text: "Warum werden Toleranzen benötigt?",
         solution: "<b>Kein Fertigungsverfahren trifft ein Maß exakt.<br>" +
@@ -30,7 +56,7 @@ const questions_data = [
     },
     {
         category: "Toleranzen",
-        level: "NV",
+        level: "N",
         title: "Größe der Toleranz",
         text: "Wie groß sollte die Toleranz gewählt werden?",
         solution: "<b>So grob wie möglich, so fein wie nötig.</b><br><br>" +
@@ -71,7 +97,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Rechtwinkeligkeit",
         text: "Welches Toleranz-Symbol ist hier dargestellt?",
         image: "Media/rechtwinkeligkeit.png",
@@ -84,7 +110,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Parallelität",
         text: "Welches Toleranz-Symbol ist hier dargestellt?",
         image: "Media/parallelität.png",
@@ -100,7 +126,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "V",
+        level: "N",
         title: "ISO-Toleranzangabe",
         text: "Bei ISO-Toleranzen (z. B. 33k6) gibt es die Begriffe 'Grundabmaß' und 'Toleranzgrad'.\nWas versteht man unter diesen Begriffen?",
         solution: "<b>Grundabmaß = Lage des Toleranzfeldes = k.</b><br><br>" +
@@ -150,7 +176,7 @@ const questions_data = [
     },
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Zahlen-Toleranz Abmaßposition",
         text: "Steht bei einer Zahlen-Toleranz das obere Abmaß oben oder unten?",
         solution: "<b>Das obere (größere) Abmaß steht immer oben.</b><br><br>" +
@@ -159,7 +185,7 @@ const questions_data = [
     },
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Toleranzklassen H, K, L",
         text: "Wofür stehen die Toleranzklassen H, K, L bei Allgemeintoleranzen?",
         solution: "<b>Für die Toleranzklassen von Form- und Lagetoleranzen.</b><br><br>" +
@@ -170,7 +196,7 @@ const questions_data = [
     },
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Formtoleranzen",
         text: "Was ermitteln Formtoleranzen?",
         solution: "<b>Die maximale Abweichung von der idealen Geometrieform.</b><br><br>" +
@@ -222,7 +248,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Abmaß",
         text: "Was versteht man unter einem Abmaß?",
         solution: "<b>Die Abweichung eines Grenzmaßes vom Nennmaß.</b><br><br>" +
@@ -263,7 +289,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "N",
+        level: "NV",
         title: "Lage des Toleranzfeldes",
         text: "Was bestimmt der Buchstabe bei einer ISO-Toleranz?",
         solution: "<b>Die Lage des Toleranzfeldes zum Nennmaß.</b><br><br>" +
@@ -274,7 +300,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Bezugselement",
         text: "Form- & Lagetoleranzen: Was ist ein Bezugselement?",
         solution: "<b>Ein festgelegtes Element eines Werkstücks, auf das sich eine geometrische Toleranz bezieht.</b><br><br>" +
@@ -284,7 +310,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Geradheit",
         text: "Was beschreibt die Geradheitstoleranz?",
         solution: "<b>Wie stark eine Linie oder Achse von einer ideal geraden Linie abweichen darf.</b><br><br>" +
@@ -295,7 +321,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Ebenheit",
         text: "Was beschreibt die Ebenheitstoleranz?",
         solution: "<b>Wie stark eine Fläche von einer ideal ebenen Fläche abweichen darf.</b><br><br>" +
@@ -305,7 +331,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Rundheit",
         text: "Was beschreibt die Rundheitstoleranz?",
         solution: "<b>Wie stark ein kreisförmiger Querschnitt von einer idealen Kreisform abweichen darf.</b><br><br>" +
@@ -315,7 +341,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Zylinderform",
         text: "Was beschreibt die Zylinderformtoleranz?",
         solution: "<b>Wie stark die Mantelfläche eines Zylinders von einer idealen Zylinderform abweichen darf.</b><br><br>" +
@@ -324,7 +350,7 @@ const questions_data = [
 
     {
         category: "Toleranzen",
-        level: "N",
+        level: "V",
         title: "Positionstoleranz",
         text: "Was beschreibt eine Positionstoleranz?",
         solution: "<b>Sie legt fest, wie weit die tatsächliche Position eines Elements von seiner idealen Position abweichen darf.</b><br><br>" +
@@ -369,7 +395,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "N",
+        level: "NV",
         title: "Hauptarten von Passungen",
         text: "Welche 3 Hauptarten von Passungen gibt es?",
         solution: "<b>* Spielpassung,<br>* Übergangspassung,<br>* Übermaßpassung.</b><br><br>" +
@@ -377,7 +403,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "N",
+        level: "NV",
         title: "Spielpassung",
         text: "Was kennzeichnet eine Spielpassung?",
         solution: "<b>Mindestmaß der Bohrung ist größer als das Höchstmaß der Welle.</b><br><br>" +
@@ -385,7 +411,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "N",
+        level: "NV",
         title: "Übermaßpassung",
         text: "Was kennzeichnet eine Übermaßpassung?",
         solution: "<b>Höchstmaß der Bohrung ist kleiner als das Mindestmaß der Welle.</b><br><br>" +
@@ -393,7 +419,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "N",
+        level: "NV",
         title: "Übergangspassung",
         text: "Wann liegt eine Übergangspassung vor?",
         solution: "<b>Wenn je nach Ist-Maß Spiel oder Übermaß entsteht.</b><br><br>" +
@@ -401,7 +427,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "N",
+        level: "NV",
         title: "Großbuchstabe ISO-Toleranz",
         text: "Was bedeutet ein Großbuchstabe (z.B. H) bei ISO-Toleranzen?",
         solution: "<b>Toleranzfeld einer Bohrung (Innenmaß).</b><br><br>" +
@@ -409,7 +435,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "N",
+        level: "NV",
         title: "Kleinbuchstabe Toleranz",
         text: "Was bedeutet ein Kleinbuchstabe (z.B. f) bei Toleranzen?",
         solution: "<b>Toleranzfeld einer Welle (Außenmaß).</b><br><br>" +
@@ -417,7 +443,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "N",
+        level: "NV",
         title: "Toleranzfeldbuchstabe H",
         text: "Welches Abmaß hat der Toleranzfeldbuchstabe 'H'?",
         solution: "<b>Das untere Abmaß ist exakt 0.</b><br><br>" +
@@ -425,7 +451,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "N",
+        level: "NV",
         title: "Toleranzfeldbuchstabe h",
         text: "Welches Abmaß hat der Toleranzfeldbuchstabe 'h'?",
         solution: "<b>Das obere Abmaß ist exakt 0.</b><br><br>" +
@@ -433,7 +459,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "V",
+        level: "NV",
         title: "System Einheitsbohrung",
         text: "Was beschreibt das System 'Einheitsbohrung'?",
         solution: "<b>Bohrung hat Toleranz H, Passung wird über die Welle gewählt.</b><br><br>" +
@@ -442,7 +468,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "V",
+        level: "NV",
         title: "System Einheitswelle",
         text: "Was beschreibt das System 'Einheitswelle'?",
         solution: "<b>Welle hat Toleranz h, Passung wird über Bohrung gewählt.</b><br><br>" +
@@ -459,7 +485,7 @@ const questions_data = [
     },
     {
         category: "Passungen",
-        level: "N",
+        level: "NV",
         title: "Passungssystem im Maschinenbau",
         text: "Welches Passungssystem ist im allgemeinen Maschinenbau am häufigsten in Verwendung?",
         solution: "<b>Das System der Einheitsbohrung.</b><br><br>" +

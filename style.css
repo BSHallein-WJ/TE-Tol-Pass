@@ -363,8 +363,8 @@ body.dark-mode button:disabled {
 
 .level-indicator {
     position: absolute;
-    top: 12px;
-    left: 26px;
+    top: -24px;
+    left: 0;
     display: flex;
     gap: 7px;
 }
@@ -387,7 +387,7 @@ body.dark-mode button:disabled {
 
 #question-text {
     display: block;
-    margin-top: 2px;
+    margin-top: -6px;
     white-space: pre-line;
 }
 
