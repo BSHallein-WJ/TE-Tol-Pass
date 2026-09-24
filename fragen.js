@@ -439,10 +439,21 @@ const questions_data = [
         antwort: "Weil ein Maß innerhalb der Toleranz liegen kann, obwohl die tatsächliche Form trotzdem unzulässig ist.",
         erklaerung: "Eine Welle kann beispielsweise im Durchmessermaß liegen, aber trotzdem unrund oder gekrümmt sein.",
         beispiel: "",
-        beispiel_bild: ["Media/positionstoleranz_bsp.png"],
+        beispiel_bild: [],
         beispiel_2: "",
         beispiel_bild_2: [],
     },
+
+
+
+    '------------------------------------------------------------------------------------------------------------------------------------------------------------------------------',
+
+
+
+
+
+
+
     {
         category: "Passungen",
         level: "NV",
