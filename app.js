@@ -16,7 +16,9 @@ const progressWrapper = document.getElementById("progress-wrapper");
 const progressBarFill = document.getElementById("progress-bar-fill");
 const categoryCounts = {
     Toleranzen: document.getElementById("tolerances-count"),
-    Passungen: document.getElementById("fits-count")
+    Passungen: document.getElementById("fits-count"),
+    "Geometrische Toleranzen": document.getElementById("geometric-tolerances-count"),
+    Aufgaben: document.getElementById("tasks-count")
 };
 
 const questionEl = document.getElementById("question");
@@ -186,7 +188,7 @@ function loadQuestion() {
     progressEl.innerText = `Frage ${currentIndex + 1} von ${questions.length}`;
     progressBarFill.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
 
-    btnPrev.disabled = currentIndex === 0;
+    btnPrev.disabled = questions.length <= 1;
     btnNext.innerText = currentIndex === questions.length - 1 ? "Beenden" : "Weiter";
     btnNext.setAttribute("aria-label", currentIndex === questions.length - 1 ? "Quiz beenden" : "Nächste Frage");
     btnNext.disabled = false;
@@ -210,8 +212,8 @@ function nextQuestion() {
 }
 
 function prevQuestion() {
-    if (quizActive && currentIndex > 0) {
-        currentIndex--;
+    if (quizActive && questions.length > 1) {
+        currentIndex = currentIndex === 0 ? questions.length - 1 : currentIndex - 1;
         loadQuestion();
     }
 }
