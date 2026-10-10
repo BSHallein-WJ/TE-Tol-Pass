@@ -1,6 +1,6 @@
 {
-    "name": "Quiz: Toleranzen & Passungen",
-    "short_name": "Toleranzen",
+    "name": "Drehen, Fräsen und Schleifen",
+    "short_name": "Drehen, Fräsen, Schleifen",
     "start_url": "./",
     "display": "standalone",
     "background_color": "#ffffff",

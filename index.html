@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Quiz: Toleranzen & Passungen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TE-Toleranzen</title>
     <link rel="icon" type="image/png" href="App-Logo.png">
     <link rel="apple-touch-icon" href="App-Logo.png">
     <link rel="manifest" href="manifest.webmanifest">
     <meta name="theme-color" content="#0b57a4">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Toleranzen">
+    <meta name="apple-mobile-web-app-title" content="Drehen, Fräsen, Schleifen">
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -20,7 +20,9 @@
     <div class="app-container">
         <div class="header">
             <div class="header-title-container">
-                <h1 id="category-title">Toleranzen & Passungen</h1>
+                <a class="btn-zentrale" id="zentrale-button"
+                    href="https://bshallein-wj.github.io/Zentral-Portal/index.html">Zentrale</a>
+                <h1 id="category-title" style="display: none;"></h1>
                 <div class="progress-wrapper" id="progress-wrapper" style="display: none;">
                     <div class="progress" id="progress">Frage 1 von 1</div>
                     <div class="progress-bar" aria-hidden="true">
@@ -40,27 +42,26 @@
         <div class="menu-dropdown" id="menu-dropdown">
             <button type="button" onclick="goToStart()">Startseite</button>
             <button type="button" onclick="toggleDarkMode()" id="dark-mode-button">Darkmode</button>
+            <label class="menu-switch">
+                <span>Antworten immer anzeigen</span>
+                <input type="checkbox" id="always-show-answers-toggle" onchange="setAlwaysShowAnswers(this.checked)"
+                    aria-label="Antworten immer anzeigen">
+                <span class="switch-slider" aria-hidden="true"></span>
+            </label>
             <button type="button" onclick="setQuestionOrder('mixed')">Fragen gemischt stellen</button>
             <button type="button" onclick="setQuestionOrder('sequential')">Fragen der Reihe nach</button>
-            <button type="button" onclick="openLegalModal()">Impressum & Datenschutz</button>
             <button type="button" onclick="closeApp()">App schließen</button>
         </div>
 
         <div class="content-area">
             <div class="start-screen" id="start-screen">
-                <div class="start-intro">
-                    <h2>Teste und festige dein Wissen!</h2>
-                </div>
-                <img src="Titel-Toleranzen.png" alt="Titel Toleranzen und Passungen" class="start-image">
-                <div class="category-buttons">
-                    <button class="btn-start" onclick="startQuiz('Toleranzen')">Toleranzen (<span
-                            id="tolerances-count">0</span>)</button>
-                    <button class="btn-start" onclick="startQuiz('Passungen')">Passungen (<span
-                            id="fits-count">0</span>)</button>
-                    <button class="btn-start" onclick="startQuiz('Geometrische Toleranzen')">Geometrische Toleranzen
-                        (<span id="geometric-tolerances-count">0</span>)</button>
-                    <button class="btn-start" onclick="startQuiz('Aufgaben')">Aufgaben (<span
-                            id="tasks-count">0</span>)</button>
+                <img src="Titelbild.png" alt="Drehen, Fräsen und Schleifen" class="start-image">
+                <div class="category-buttons" id="category-buttons"></div>
+                <div class="legal-links">
+                    <a href="https://bshallein-wj.github.io/Zentral-Portal/impressum.html" target="_blank"
+                        rel="noopener noreferrer">Impressum</a>
+                    <a href="https://bshallein-wj.github.io/Zentral-Portal/datenschutz.html" target="_blank"
+                        rel="noopener noreferrer">Datenschutz</a>
                 </div>
             </div>
 
@@ -85,49 +86,11 @@
             <button class="btn-solve" onclick="toggleSolution()">Lösung</button>
             <button class="btn-next" id="btn-next" onclick="nextQuestion()">Weiter</button>
         </div>
+
     </div>
 
     <div class="image-viewer" id="image-viewer" aria-hidden="true">
         <img id="viewer-image" src="" alt="">
-    </div>
-
-    <!-- Modal für Datenschutz & Impressum -->
-    <div id="legal-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeLegalModal()">&times;</span>
-            <h3>Impressum & Datenschutz</h3>
-            <h4>Impressum</h4>
-            <p><strong>Medieninhaber, Herausgeber und für den Inhalt verantwortlich:</strong><br>
-                Josef Wallmann<br>
-                c/o Christine Weißenbacher<br>
-                Gaißau 172<br>
-                5425 Krispl<br>
-                Österreich</p>
-
-            <p><strong>Kontakt:</strong><br>
-                E-Mail: BS.Hallein@gmail.com</p>
-
-            <p><strong>Hinweis:</strong><br>
-                Dieses Lernangebot ist ein privates, nicht kommerzielles Projekt und dient ausschließlich
-                Bildungszwecken. Es besteht kein offizieller Zusammenhang mit einer Schule oder sonstigen
-                Bildungseinrichtung.</p>
-
-            <h4>Datenschutz</h4>
-            <p>Diese Anwendung verwendet keine Cookies, kein Tracking und keine Analysewerkzeuge. Sie speichert
-                ausschließlich die lokale Einstellung für den Darkmode im Browser. Es werden keine personenbezogenen
-                Daten gespeichert.</p>
-
-            <p>Die Website wird über GitHub Pages bereitgestellt. Beim Aufruf können durch GitHub technische
-                Verbindungsdaten, insbesondere die IP-Adresse, zu Sicherheitszwecken protokolliert und gespeichert
-                werden. Weitere Informationen enthält die
-                <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
-                    target="_blank" rel="noopener noreferrer">Datenschutzerklärung von GitHub</a>.
-            </p>
-
-            <p><strong>Haftungsausschluss:</strong><br>
-                Die Inhalte wurden sorgfältig erstellt. Für die Richtigkeit und Vollständigkeit der Aufgaben und
-                Lösungen wird keine Gewähr übernommen.</p>
-        </div>
     </div>
 
     <script src="fragen.js"></script>

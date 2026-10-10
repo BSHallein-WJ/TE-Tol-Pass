@@ -4,22 +4,19 @@ let questions = [];
 let currentIndex = 0;
 let quizActive = false;
 let questionOrder = "sequential";
-let selectedCategory = "Toleranzen";
+let alwaysShowAnswers = localStorage.getItem("alwaysShowAnswers") === "true";
+let selectedCategory = originalQuestions[0] && originalQuestions[0].category || "";
 const lastStartedQuestionByCategory = {};
 
 const startScreen = document.getElementById("start-screen");
 const categoryTitle = document.getElementById("category-title");
+const zentraleButton = document.getElementById("zentrale-button");
 const quizScreen = document.getElementById("quiz-screen");
 const footerButtons = document.getElementById("footer-buttons");
 const progressEl = document.getElementById("progress");
 const progressWrapper = document.getElementById("progress-wrapper");
 const progressBarFill = document.getElementById("progress-bar-fill");
-const categoryCounts = {
-    Toleranzen: document.getElementById("tolerances-count"),
-    Passungen: document.getElementById("fits-count"),
-    "Geometrische Toleranzen": document.getElementById("geometric-tolerances-count"),
-    Aufgaben: document.getElementById("tasks-count")
-};
+const categoryButtons = document.getElementById("category-buttons");
 
 const questionEl = document.getElementById("question");
 const levelIndicatorEl = document.getElementById("level-indicator");
@@ -30,12 +27,19 @@ const solutionAnswerEl = document.getElementById("solution-answer");
 const solutionImagesEl = document.getElementById("solution-images");
 const btnPrev = document.getElementById("btn-prev");
 const btnNext = document.getElementById("btn-next");
+const alwaysShowAnswersToggle = document.getElementById("always-show-answers-toggle");
 
 const imageViewer = document.getElementById("image-viewer");
 const viewerImage = document.getElementById("viewer-image");
 
-Object.entries(categoryCounts).forEach(([category, countElement]) => {
-    countElement.innerText = originalQuestions.filter(question => question.category === category).length;
+const categories = [...new Set(originalQuestions.map(question => question.category).filter(Boolean))];
+categories.forEach(category => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "btn-start";
+    button.innerText = `${category} (${originalQuestions.filter(question => question.category === category).length})`;
+    button.addEventListener("click", () => startQuiz(category));
+    categoryButtons.appendChild(button);
 });
 
 const savedDarkMode = localStorage.getItem("darkMode") === "true";
@@ -45,6 +49,7 @@ if (savedDarkMode) {
 }
 
 updateOrderToggleButton();
+alwaysShowAnswersToggle.checked = alwaysShowAnswers;
 
 function renderImages(container, imgList) {
     if (imgList && imgList.length > 0) {
@@ -87,6 +92,8 @@ function shuffleQuestions(array) {
 function startQuiz(category) {
     selectedCategory = category;
     categoryTitle.innerText = category;
+    categoryTitle.style.display = "";
+    zentraleButton.style.display = "none";
     const categorizedQuestions = originalQuestions.filter(question => question.category === selectedCategory);
     questions = questionOrder === "mixed" ? shuffleQuestions(categorizedQuestions) : [...categorizedQuestions];
 
@@ -152,6 +159,9 @@ function renderSolution(question) {
     if (question.erklaerung) {
         sections.push(`<strong><em><u>Erklärung:</u></em></strong><br>${renderBold(question.erklaerung)}`);
     }
+    if (question.hinweis) {
+        sections.push(`<strong><em><u>Hinweis:</u></em></strong><br>${renderBold(question.hinweis)}`);
+    }
     if (question.beispiel) {
         sections.push(`<strong><em><u>Beispiel:</u></em></strong><br>${renderBold(question.beispiel)}`);
     }
@@ -167,11 +177,11 @@ function loadQuestion() {
     const level = (q.level || "").toUpperCase();
     levelIndicatorEl.innerHTML = [
         level.includes("N") ? '<span class="level-dot level-n" title="Normales Wissensniveau"></span>' : "",
-        level.includes("V") ? '<span class="level-dot level-v" title="Erhöhtes Wissensniveau"></span>' : ""
+        level.includes("V") ? '<span class="level-dot level-v" title="Vertieftes Wissensniveau"></span>' : ""
     ].join("");
-    levelIndicatorEl.setAttribute("aria-label", level === "NV" ? "Normales und erhöhtes Wissensniveau" :
+    levelIndicatorEl.setAttribute("aria-label", level === "NV" ? "Normales und vertieftes Wissensniveau" :
         level === "N" ? "Normales Wissensniveau" :
-            level === "V" ? "Erhöhtes Wissensniveau" : "Kein Wissensniveau zugeordnet");
+            level === "V" ? "Vertieftes Wissensniveau" : "Kein Wissensniveau zugeordnet");
     questionTextEl.innerHTML = renderBold(q.frage);
     renderImages(questionImagesEl, [
         ...(q.fragebild || []),
@@ -184,7 +194,7 @@ function loadQuestion() {
         ...(q.beispiel_bild_2 || [])
     ]);
 
-    solutionBox.style.display = "none";
+    solutionBox.style.display = alwaysShowAnswers ? "block" : "none";
     progressEl.innerText = `Frage ${currentIndex + 1} von ${questions.length}`;
     progressBarFill.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
 
@@ -196,7 +206,16 @@ function loadQuestion() {
 
 function toggleSolution() {
     if (!quizActive) return;
+    if (alwaysShowAnswers) return;
     solutionBox.style.display = (solutionBox.style.display === "block") ? "none" : "block";
+}
+
+function setAlwaysShowAnswers(enabled) {
+    alwaysShowAnswers = enabled;
+    localStorage.setItem("alwaysShowAnswers", enabled);
+    if (quizActive) {
+        solutionBox.style.display = enabled ? "block" : "none";
+    }
 }
 
 function nextQuestion() {
@@ -220,7 +239,9 @@ function prevQuestion() {
 
 function goToStart() {
     quizActive = false;
-    categoryTitle.innerText = "Toleranzen & Passungen";
+    categoryTitle.innerText = "";
+    categoryTitle.style.display = "none";
+    zentraleButton.style.display = "";
     startScreen.style.display = "flex";
     quizScreen.style.display = "none";
     footerButtons.style.display = "none";
@@ -243,15 +264,6 @@ function toggleDarkMode() {
 function toggleMenu() {
     const dropdown = document.getElementById("menu-dropdown");
     dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-}
-
-function openLegalModal() {
-    document.getElementById("legal-modal").style.display = "block";
-    document.getElementById("menu-dropdown").style.display = "none";
-}
-
-function closeLegalModal() {
-    document.getElementById("legal-modal").style.display = "none";
 }
 
 window.onclick = function (event) {
